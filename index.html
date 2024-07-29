@@ -1,7 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Restaurants for Selected Dish</title>
+    <style>
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 5px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .axis-label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .transition-text {
+            font-size: 14px;
+            font-style: auto;
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div>
+        <h2>Chinese Restaurant Reviews in the Yelp Academic Dataset</h2>
+        <svg id="circularBarChart" width="800" height="800"></svg>
+    </div>
+    <h2>These are the Top Restaurants for a Selected Dish</h2>
+    <label for="dish-select">Select Dish:</label>
+    <select id="dish-select">
+        <option value="fried_rice">Fried Rice</option>
+        <option value="chow_mein">Chow Mein</option>
+        <option value="orange_chicken">Orange Chicken</option>
+        <option value="noodle_soup">Noodle Soup</option>
+        <option value="kung_pao_chicken">Kung Pao Chicken</option>
+        <option value="dumplings">Dumplings</option>
+        <option value="dim_sum">Dim Sum</option>
+        <option value="wonton">Wonton</option>
+        <option value="fried_chicken">Fried Chicken</option>
+        <option value="soy_milk">Soy Milk</option>
+    </select>
+    <div id="chart-container">
+        <svg id="clevelandDotPlot" width="960" height="840"></svg>
+    </div>
+    <div id="textContainer">
+        <p id="transitionText" class="transition-text"></p>
+    </div>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
