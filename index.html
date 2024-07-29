@@ -34,6 +34,7 @@
         <h2>Chinese Restaurant Reviews in the Yelp Academic Dataset</h2>
         <svg id="circularBarChart" width="800" height="800"></svg>
     </div>
+    
     <h2>These are the Top Restaurants for a Selected Dish</h2>
     <label for="dish-select">Select Dish:</label>
     <select id="dish-select">
@@ -53,6 +54,13 @@
     </div>
     <div id="textContainer">
         <p id="transitionText" class="transition-text"></p>
+    </div>
+    <div>
+        <h2>Dish Optimizer</h2>
+        <label for="user-dish-input">Enter Dish Name:</label>
+        <input type="text" id="user-dish-input" placeholder="Enter a valid dish name">
+        <button id="recommend-btn">Get the Best Recommendations!</button>
+        <ul id="recommendations"></ul>
     </div>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="script.js"></script>

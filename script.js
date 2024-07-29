@@ -338,9 +338,52 @@ function createTopDishesVisualization(data, dish) {
     .text(`Top Restaurants for ${dish.replace('_', ' ')}`);
 }
 
+// Get top 5 recommendations for a dish
+function getRecommendations(dish) {
+    d3.csv(`data/top_restaurants_${dish}.csv`).then(data => {
+        const top5 = data.slice(0, 5);
+        const recommendations = d3.select("#recommendations");
+        recommendations.html(""); // Clear previous recommendations
+
+        let foundPerfectMatch = false;
+        let foundBestAlternative = false;
+
+        top5.forEach(d => {
+            const listItem = recommendations.append("li")
+                .text(`${d.Restaurant_Name}: Average Dish Rating - ${d.Average_Rating}, Overall Rating - ${d.Overall_Rating}`);
+
+            if (d.Average_Rating == 5.0 && d.Overall_Rating == 5.0) {
+                listItem.style("color", "red").style("font-weight", "bold");
+                foundPerfectMatch = true;
+            }
+        });
+
+        if (!foundPerfectMatch) {
+            top5.forEach(d => {
+                if (d.Average_Rating == 5.0 && d.Overall_Rating == 4.5 && !foundBestAlternative) {
+                    const listItem = recommendations.selectAll("li")
+                        .filter(function() { return d3.select(this).text().includes(d.Restaurant_Name); })
+                        .style("color", "red").style("font-weight", "bold");
+                    foundBestAlternative = true;
+                }
+            });
+        }
+    }).catch(error => {
+        console.error("Error fetching data:", error);
+        const recommendations = d3.select("#recommendations");
+        recommendations.html("<li>No data available for the entered dish.</li>");
+    });
+}
+
 // load data
 d3.csv('data/top_restaurants_fried_rice.csv').then(data => {
   createClevelandDotPlot(data, 'fried_rice');
+});
+
+// listener for the get recommendations button
+d3.select("#recommend-btn").on("click", function() {
+    const userInput = d3.select("#user-dish-input").property("value").toLowerCase().replace(/ /g, "_");
+    getRecommendations(userInput);
 });
 
 // listen for changes from dropdown
