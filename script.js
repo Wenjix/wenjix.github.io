@@ -369,9 +369,9 @@ function getRecommendations(dish) {
             });
         }
     }).catch(error => {
-        console.error("Error fetching data:", error);
+        console.error("Error:", error);
         const recommendations = d3.select("#recommendations");
-        recommendations.html("<li>No data available for the entered dish.</li>");
+        recommendations.html("<li>Please enter another dish.</li>");
     });
 }
 
